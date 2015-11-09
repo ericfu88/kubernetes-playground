@@ -1,0 +1,20 @@
+# app.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: appserver
+  name: appserver-controller
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: appserver
+    spec:
+      containers:
+      - image: gcr.io/pollablecontent/hello-node
+        name: appserver
+        ports:
+        - containerPort: 8080
+          name: appserver

@@ -1,0 +1,35 @@
+# app.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: appserver
+  name: appserver-controller
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: appserver
+    spec:
+      containers:
+      - image: gcr.io/pollablecontent/hello-node:latest
+        name: app
+        ports:
+        - containerPort: 8080
+          name: appserver
+      - image: gcr.io/pollablecontent/nginx-app:latest
+        name: nginx
+        volumeMounts:
+        - name: sslcerts
+          mountPath: /etc/nginx
+          readOnly: true
+        ports:
+        - containerPort: 80
+          name: nginx-http
+        - containerPort: 443
+          name: nginx-https
+      volumes:
+        - name: sslcerts
+          secret:
+            secretName: mysecrets

@@ -1,14 +1,12 @@
-# This script creates a node.js app server talking to a mongo db.
+# This script creates a node.js app serves https traffic
+# Needs two docker images
+#  - one for the app, listening on port 8080
+#  - one for nginx, routes https traffic to 8080
+
 export PROJECT="pollablecontent"
 export ZONE="us-central1-f"
 export CLUSTER_NAME="nodemongotest"
 
-
-gcloud compute disks create \
-  --project ${PROJECT} \
-  --zone ${ZONE} \
-  --size 10GB \
-  mongo-disk
 
 gcloud container clusters create ${CLUSTER_NAME} \
   --zone ${ZONE} \
@@ -22,7 +20,5 @@ gcloud container clusters get-credentials ${CLUSTER_NAME}
 
 gcloud config list
 
-kubectl create -f mongodb.yaml
-kubectl create -f mongodb-service.yaml
 kubectl create -f app.yaml
 kubectl create -f app-service.yaml

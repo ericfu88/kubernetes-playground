@@ -4,7 +4,7 @@ var http = require('http');
 
 var handleRequest = function(request, response) {
   response.writeHead(200);
-  response.end("Hello World! This is server 0.3");
+  response.end("Hello World! This is server 0.4");
 }
 
 // Database Configuration

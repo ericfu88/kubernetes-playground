@@ -4,7 +4,7 @@ var http = require('http');
 
 var handleRequest = function(request, response) {
   response.writeHead(200);
-  response.end("Hello World! This is server 0.2");
+  response.end("Hello World! This is server 0.3");
 }
 
 // Database Configuration
@@ -13,5 +13,8 @@ var handleRequest = function(request, response) {
 // TODO: username and password to db
 // mongoose.connect(databaseUrl);
 
+var port = process.env.RUN_PORT || 8080;
+
 var www = http.createServer(handleRequest);
-www.listen(8080);
+console.log("Process listening on " + port);
+www.listen(port);

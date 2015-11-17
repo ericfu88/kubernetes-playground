@@ -2,7 +2,11 @@
 "use strict";
 var http = require('http');
 
+var logger = require('./logger');
+
+
 var handleRequest = function(request, response) {
+  logger.info('A request for hello-node');
   response.writeHead(200);
   response.end("Hello World! This is server 0.4");
 }

@@ -4,7 +4,6 @@ var http = require('http');
 
 var logger = require('./logger');
 
-
 var handleRequest = function(request, response) {
   logger.info('A request for hello-node');
   response.writeHead(200);
@@ -20,5 +19,5 @@ var handleRequest = function(request, response) {
 var port = process.env.RUN_PORT || 8080;
 
 var www = http.createServer(handleRequest);
-console.log("Process listening on " + port);
+logger.log('info', "Process listening on " + port, {process: 'efu_hello_node'});
 www.listen(port);
